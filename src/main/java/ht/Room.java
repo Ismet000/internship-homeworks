@@ -1,14 +1,18 @@
 package ht;
 
+import ht2.Bookable;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Room {
+public class Room implements Bookable {
     private final String roomId;
     private final RoomType roomType;
     private final BigDecimal nightlyRate;
     private RoomStatus status;
+    private boolean booked;
+
 
     public Room(RoomType roomType, BigDecimal nightlyRate, RoomStatus status) {
         this.roomId = "R-" + UUID.randomUUID().toString();
@@ -38,6 +42,18 @@ public class Room {
         return status;
     }
 
+    //
+
+    @Override
+    public boolean isBooked() {
+        return booked;
+    }
+
+    @Override
+    public void setBooked(boolean booked) {
+        this.booked =booked;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,4 +66,6 @@ public class Room {
     public int hashCode() {
         return Objects.hash(roomId);
     }
+
+
 }

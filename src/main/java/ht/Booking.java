@@ -1,11 +1,13 @@
 package ht;
 
+import ht2.Chargeable;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
-public class Booking {
+public class Booking implements Chargeable {
     private final String bookingId;
     private final Room room;
     private final Guest guest;
@@ -48,6 +50,11 @@ public class Booking {
     public BigDecimal getTotalCost() {
         long nights = ChronoUnit.DAYS.between(checkInDate, checkOutDate);
         return room.getNightlyRate().multiply(BigDecimal.valueOf(nights));
+    }
+
+    @Override
+    public BigDecimal getChargeAmount() {
+        return getTotalCost();
     }
 
     @Override
